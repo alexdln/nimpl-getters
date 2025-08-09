@@ -1,6 +1,6 @@
 {
   "name": "@nimpl/getters",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Implementation of server getters in React Server Components without switching to SSR in next.js",
   "files": [
     "**/*.js",
