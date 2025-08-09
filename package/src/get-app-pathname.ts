@@ -6,7 +6,11 @@ export function getAppPathname() {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const pageStore = workUnitAsyncStorage.getStore() as any;
-    const pageTags = pageStore.implicitTags.filter((tag: string) => tag.startsWith("_N_T_/"));
+    const tags =
+        (Array.isArray(pageStore.implicitTags.tags) && pageStore.implicitTags.tags) ||
+        (Array.isArray(pageStore.implicitTags) && pageStore.implicitTags) ||
+        [];
+    const pageTags = tags.filter((tag: string) => tag.startsWith("_N_T_/"));
     const pathnameTag = pageTags[pageTags.length - 1];
     return pathnameTag.substring(5);
 }

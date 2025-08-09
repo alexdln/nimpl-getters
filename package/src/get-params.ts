@@ -28,13 +28,15 @@ export const getParams = (options: GetParamsOptions = {}) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const pageStore = workUnitAsyncStorage.getStore() as any;
 
-    if (!pageConfigurationStore || !pageStore?.url?.pathname) return {};
+    if (!pageConfigurationStore) return {};
 
     const { route } = pageConfigurationStore;
     const pagePath = route;
-    const urlPathname = pageStore.url.pathname;
+    const urlPathname = pageStore?.url?.pathname;
 
     const targetUrlPathname = pathname || urlPathname;
+
+    if (!targetUrlPathname) return {};
 
     let isInvalid = false;
     try {
