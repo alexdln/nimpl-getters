@@ -1,7 +1,7 @@
 import { workAsyncStorage } from "next/dist/server/app-render/work-async-storage.external";
-import { workUnitAsyncStorage } from "next/dist/server/app-render/work-unit-async-storage.external";
 import { serverGetterInClientComponentError } from "./server-getter-in-client-component-error";
 import { INVALID_PARSE, parseParams } from "./utils";
+import { getAppPathname } from "./get-app-pathname";
 
 type GetParamsOptions = {
     /**
@@ -16,8 +16,8 @@ type GetParamsOptions = {
     pagePaths?: string[];
 };
 
-export const getParams = (options: GetParamsOptions = {}) => {
-    serverGetterInClientComponentError("getParams");
+export const getAppParams = (options: GetParamsOptions = {}) => {
+    serverGetterInClientComponentError("getAppParams");
 
     const store = workAsyncStorage.getStore();
 
@@ -25,14 +25,12 @@ export const getParams = (options: GetParamsOptions = {}) => {
 
     const { ignoreDifferenceError, pagePaths, pathname } = options;
     const pageConfigurationStore = workAsyncStorage.getStore();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const pageStore = workUnitAsyncStorage.getStore() as any;
 
     if (!pageConfigurationStore) return {};
 
     const { route } = pageConfigurationStore;
     const pagePath = route;
-    const urlPathname = pageStore?.url?.pathname;
+    const urlPathname = getAppPathname();
 
     const targetUrlPathname = pathname || urlPathname;
 

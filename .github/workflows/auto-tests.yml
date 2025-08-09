@@ -22,11 +22,24 @@ jobs:
         with:
           version: 8
 
-      - name: Install dependencies and build
+      - name: Install dependencies and build package
         run: |
           pnpm install
           pnpm run build
         working-directory: ./package
+
+      # Step to make sure we will install the latest Canary versions
+      - name: Remove pnpm data
+        run: |
+          rm -rf node_modules
+          rm -rf package/node_modules
+          rm -rf tests/base/node_modules
+          rm -rf pnpm-lock.yaml
+
+      - name: Install test dependencies
+        run: |
+          pnpm install --ignore-workspace
+        working-directory: ./tests/base
 
       - name: Test package general
         run: |
