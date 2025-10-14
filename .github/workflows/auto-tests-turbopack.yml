@@ -2,7 +2,7 @@ name: Test package
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: "0 */6 * * *"
 
 jobs:
   test:
@@ -15,7 +15,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v3
@@ -26,6 +26,7 @@ jobs:
         run: |
           pnpm install
           pnpm run build
+          pnpm pack --out test-package.tgz
         working-directory: ./package
 
       # Step to make sure we will install the latest Canary versions
@@ -39,6 +40,7 @@ jobs:
       - name: Install test dependencies
         run: |
           pnpm install --ignore-workspace
+          pnpm install --ignore-workspace ../../package/test-package.tgz
         working-directory: ./tests/base
 
       - name: Test package general
