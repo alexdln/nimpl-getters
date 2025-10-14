@@ -15,26 +15,34 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 8
+          version: 10
 
       - name: Install dependencies and build
         run: |
           pnpm install
           pnpm run build
+          pnpm pack --out test-package.tgz
           cp ../README.md .
           cp ../LICENSE .
         working-directory: ./package
 
-      - name: Test package general
+      - name: Test package general with webpack
         run: |
           pnpm add next@canary
           pnpm playwright install
-          pnpm build
+          pnpm build --webpack
+          pnpm test
+        working-directory: ./tests/base
+
+      - name: Test package general with turbopack
+        run: |
+          pnpm install --ignore-workspace ../../package/test-package.tgz
+          pnpm build --turbopack
           pnpm test
         working-directory: ./tests/base
 

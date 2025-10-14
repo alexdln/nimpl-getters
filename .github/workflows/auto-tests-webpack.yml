@@ -1,0 +1,55 @@
+name: Test package
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10
+
+      - name: Install dependencies and build package
+        run: |
+          pnpm install
+          pnpm run build
+        working-directory: ./package
+
+      # Step to make sure we will install the latest Canary versions
+      - name: Remove pnpm data
+        run: |
+          rm -rf node_modules
+          rm -rf package/node_modules
+          rm -rf tests/base/node_modules
+          rm -rf pnpm-lock.yaml
+
+      - name: Install test dependencies
+        run: |
+          pnpm install --ignore-workspace
+        working-directory: ./tests/base
+
+      - name: Test package general
+        run: |
+          pnpm playwright install
+          pnpm build --webpack
+          pnpm test
+        working-directory: ./tests/base
+
+      - name: Set summary
+        run: |
+          NEXT_VERSION=$(node -p "require('next/package.json').version")
+          echo "$NEXT_VERSION" >> $GITHUB_STEP_SUMMARY
+        working-directory: ./tests/base
