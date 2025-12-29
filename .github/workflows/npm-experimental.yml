@@ -1,12 +1,16 @@
-name: Publish package
+name: Publish experimental package
 
 on:
-  release:
-    types: [created]
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
-  publish:
+  publish-experimental:
     runs-on: ubuntu-latest
+
+    if: |
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      ${{ github.head_ref != 'main' && !startsWith(github.head_ref, 'canary') }}
 
     steps:
       - name: Checkout code
@@ -44,20 +48,16 @@ jobs:
           pnpm test
         working-directory: ./tests/base
 
-      - name: Publish on main
-        if: "!contains(github.ref_name, 'canary')"
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Compute experimental version
+        id: version
         run: |
-          npm version --no-git-tag-version ${{github.ref_name}}
-          npm publish --access public
-        working-directory: ./package
+          HASH=$(git rev-parse --short HEAD)
+          echo "version=0.0.0-experimental-${HASH}" >> $GITHUB_OUTPUT
 
-      - name: Publish on canary
-        if: contains(github.ref_name, 'canary')
+      - name: Publish experimental package
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm version --no-git-tag-version ${{github.ref_name}}
-          npm publish --tag canary --access public
+          npm version --no-git-tag-version ${{steps.version.outputs.version}}
+          npm publish --tag experimental --access public
         working-directory: ./package
