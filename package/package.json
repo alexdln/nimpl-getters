@@ -23,12 +23,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/vordgi/nimpl-getters.git"
+    "url": "git://github.com/alexdln/nimpl-getters.git"
   },
   "author": {
-    "name": "Savelyev Alexander",
-    "email": "vordgi1@gmail.com",
-    "url": "https://github.com/vordgi/"
+    "name": "Alex Savelyev",
+    "email": "dev@alexdln.com",
+    "url": "https://github.com/alexdln/"
   },
   "license": "MIT",
   "devDependencies": {
