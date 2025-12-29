@@ -61,7 +61,7 @@ export const getParams = (options: GetParamsOptions = {}) => {
         isInvalid = true;
     }
     if (isInvalid && !ignoreDifferenceError) {
-        const createIssueUrl = new URL("https://github.com/vordgi/nimpl-getters/issues/new");
+        const createIssueUrl = new URL("https://github.com/alexdln/nimpl-getters/issues/new");
         createIssueUrl.searchParams.set("title", "Error parsing segments in get-params");
         createIssueUrl.searchParams.set(
             "body",

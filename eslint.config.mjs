@@ -19,4 +19,5 @@ export default [
     },
     ...tseslint.configs.recommended,
     eslintPluginPrettierRecommended,
-].map((r) => Object.assign(r, { ignores }));
+    { ignores },
+];

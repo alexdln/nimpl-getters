@@ -11,21 +11,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/vordgi/nimpl-getters.git"
+    "url": "git://github.com/alexdln/nimpl-getters.git"
   },
   "author": {
-    "name": "Savelyev Alexander",
-    "email": "vordgi1@gmail.com",
-    "url": "https://github.com/vordgi/"
+    "name": "Alex Savelyev",
+    "email": "dev@alexdln.com",
+    "url": "https://github.com/alexdln/"
   },
   "devDependencies": {
-    "eslint": "8.57.0",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-prettier": "5.1.3",
-    "husky": "9.0.11",
-    "prettier": "3.2.5",
-    "typescript-eslint": "7.8.0"
+    "eslint": "9.39.2",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.4",
+    "husky": "9.1.7",
+    "prettier": "3.7.4",
+    "typescript-eslint": "8.51.0"
   },
-  "license": "MIC",
+  "license": "MIT",
   "packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971"
 }
