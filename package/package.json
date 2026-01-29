@@ -32,11 +32,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "25.0.3",
-    "@types/react": "19.2.7",
-    "next": "16.1.1",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
+    "@types/node": "25.1.0",
+    "@types/react": "19.2.10",
+    "next": "16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "typescript": "5.9.3"
   },
   "peerDependencies": {
