@@ -9,14 +9,14 @@
   },
   "dependencies": {
     "@nimpl/getters": "link:..\\..\\package",
-    "next": "^16.1.1",
+    "next": "^16.1.6",
     "react": "19.3.0-canary-65eec428-20251218",
     "react-dom": "19.3.0-canary-65eec428-20251218"
   },
   "devDependencies": {
-    "@playwright/test": "^1.57.0",
-    "@types/node": "25.0.3",
-    "@types/react": "19.2.7",
+    "@playwright/test": "^1.58.0",
+    "@types/node": "25.1.0",
+    "@types/react": "19.2.10",
     "typescript": "5.9.3"
   }
 }
